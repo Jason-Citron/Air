@@ -5,22 +5,15 @@ local scriptMenu = menu.player_root()
 local playerSelectMenu = scriptMenu:add_submenu("玩家", {}, nil, nil)
 local localPlayerIndex = native.player.player_id()
 local spawnedPlayers = {}
-
--- E: "قاستەل"
--- E: "لاعب التخريب"
--- E: "диверсиялық ойыншы"
--- E: "диверсант"
--- E: "jogador de sabotagem"
-
 local function SpawnObjectForPlayer(playerIndex)
-    -- E: "تحطم فعال بنسبة 100٪"
     if playerIndex == localPlayerIndex then
         return 
+
     end
     if spawnedPlayers[playerIndex] then
         return 
     end
-
+    
     local playerPed = native.player.get_player_ped(playerIndex)
 
     local objectHash = native.misc.get_hash_key('s_chuckwagonawning01b')
@@ -57,4 +50,5 @@ script.keep_alive()
 
 script.on_shutdown(function()
     toast.add_info("中断FFFF", "中断")
+
 end)
