@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="zh" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canva</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Noto+Serif+SC:wght@400;600;700&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes morphBlob {
+      0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+      25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+      50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+      75% { border-radius: 60% 30% 50% 40% / 60% 40% 60% 50%; }
+    }
+
+    .anim-float { animation: float 6s ease-in-out infinite; }
+    .anim-fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+    .anim-fade { animation: fadeIn 1s ease-out forwards; opacity: 0; }
+    .anim-scale { animation: scaleIn 0.7s ease-out forwards; opacity: 0; }
+    .anim-slide { animation: slideRight 0.6s ease-out forwards; opacity: 0; }
+
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+    .delay-4 { animation-delay: 0.6s; }
+    .delay-5 { animation-delay: 0.75s; }
+    .delay-6 { animation-delay: 0.9s; }
+
+    .landscape-card {
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease, background 0.3s ease;
+    }
+    .landscape-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      background: rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 12px 48px rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .shimmer-text {
+      background: linear-gradient(90deg, currentColor 40%, rgba(255,255,255,0.8) 50%, currentColor 60%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .morph-blob {
+      animation: morphBlob 8s ease-in-out infinite;
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .scroll-container {
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto scroll-container" style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); color: #ffffff; font-family: 'DM Sans', sans-serif;"><!--  Air@canva.xin -->
+   <header id="hero" class="relative w-full overflow-hidden" style="min-height: 90%; padding-top: 80px; background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(20,20,20,0.6) 100%);"><!-- Air@canva.xin -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+     <div class="morph-blob absolute" style="width: 500px; height: 500px; top: -10%; right: -10%; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);"></div>
+     <div class="morph-blob absolute" style="width: 400px; height: 400px; bottom: -5%; left: -8%; background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%); animation-delay: -4s;"></div>
+     <div class="absolute" style="width: 300px; height: 300px; top: 30%; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);"></div>
+    </div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center justify-center" style="min-height: 100%; padding: 60px 24px;"><!-- Decorative mountain SVG -->
+     <div class="anim-scale mb-8">
+      <svg width="120" height="80" viewbox="0 0 120 80" fill="none" class="anim-float"><path d="M60 8L20 72h80L60 8z" stroke="#ffffff" stroke-width="1" fill="rgba(255,255,255,0.08)" /> <path d="M45 32L15 72h60L45 32z" stroke="#ffffff" stroke-width="0.5" fill="rgba(255,255,255,0.04)" opacity="0.6" /> <path d="M80 40L60 72h40L80 40z" stroke="#ffffff" stroke-width="0.5" fill="rgba(255,255,255,0.04)" opacity="0.6" /> <circle cx="95" cy="15" r="8" stroke="#e0e0e0" stroke-width="0.5" fill="rgba(224,224,224,0.1)" /> <line x1="10" y1="72" x2="110" y2="72" stroke="#ffffff" stroke-width="0.5" opacity="0.4" />
+      </svg>
+     </div>
+     <h1 id="hero-title" class="anim-fade-up delay-1 text-center" style="font-family: 'Playfair Display', 'Noto Serif SC', serif; font-weight: 700; font-size: clamp(2.4rem, 6vw, 4.5rem); line-height: 1.15; letter-spacing: -0.02em;">Air</h1>
+     <p id="hero-subtitle" class="anim-fade-up delay-2 text-center mt-6 max-w-lg" style="font-size: 1.05rem; line-height: 1.8; color: #d0d0d0; font-weight: 300;">ChatAir</p>
+    </div>
+   </header><!-- Air@canva.xin -->
+   <section id="explore" class="w-full py-20 px-6" style="background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(30,30,30,0.3) 100%);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-16"><span class="text-xs tracking-widest uppercase" style="color: #ffffff;">Join · 加入</span>
+      <h2 id="explore-title" class="mt-3" style="font-family: 'Playfair Display', 'Noto Serif SC', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;">Q.Q</h2>
+      <div class="mx-auto mt-4" style="width: 50px; height: 2px; background: #ffffff;"></div><a href="https://qun.qq.com/universal-share/share?ac=1&amp;authKey=SXgsufWTtELKoJpWAMBOu0HpZBJm5%2FrL%2F0Lrly4GTvHenTTO%2Fn4oFkGXxCqMsjxv&amp;busi_data=eyJncm91cENvZGUiOiIxMTUzMzI1NjYiLCJ0b2tlbiI6IkpRWFo3MTlGVkRsT2poT3dXZnJyUjR2UVB5ZW1XRUFJa0xMajJFTU1YODRQUHNLZDNHblpTS2haRWMvb1A1anoiLCJ1aW4iOiIxNDQ0ODAwMDQxIn0%3D&amp;data=htvRMr9seJ_pZCNNCT00vLu4_JDOxl_Az1xZn44oEYEKGyEMerjF20JE0tzeTZtYylgpL3lc8krCRTxB1_dMGA&amp;svctype=4&amp;tempid=h5_group_info" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-medium transition-all duration-300 mt-6" style="background: #ffffff; color: #000000;" onmouseenter="this.style.background='#f0f0f0'; this.style.transform='translateY(-2px)'" onmouseleave="this.style.background='#ffffff'; this.style.transform='translateY(0)'"> <i data-lucide="external-link" style="width:16px;height:16px;"></i> 进入QQ群 </a>
+     </div>
+    </div>
+   </section><!--  Air@canva.xin -->
+   <section id="gallery" class="w-full py-20 px-6" style="background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(10,10,10,0.5) 100%);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-16"><span class="text-xs tracking-widest uppercase" style="color: #ffffff;">Gallery · 相册</span>
+      <h2 class="mt-3" style="font-family: 'Playfair Display', 'Noto Serif SC', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;">精选相册</h2>
+      <div class="mx-auto mt-4" style="width: 50px; height: 2px; background: #ffffff;"></div>
+     </div><!-- Air@canva.xin -->
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Card 1 - With Image -->
+      <div class="landscape-card rounded-2xl overflow-hidden relative group cursor-pointer backdrop-blur-md transition-all duration-500" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); min-height: 280px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);"><img src="https://tx2.a.kwimgs.com/ufile/atlas/NTE5OTk2ODg4ODkxNjU0NjY4Ml8xNzUzNjc2MDE3Nzkz_16.jpg" alt="相册一" loading="lazy" class="w-full h-full object-cover absolute inset-0" style="transition: transform 0.5s ease;" onerror="console.error('Image failed to load:', this.src); this.style.display='none';">
+      </div><!-- Card 2 -->
+      <div class="landscape-card rounded-2xl overflow-hidden relative group cursor-pointer backdrop-blur-md transition-all duration-500" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); min-height: 280px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);"><img src="https://tx2.a.kwimgs.com/ufile/atlas/NTIxMjYzNTI2NTA5OTAxMDkwMV8xNzUzMjYxMjE1MTU2_17.jpg" alt="相册二" loading="lazy" class="w-full h-full object-cover absolute inset-0" style="transition: transform 0.5s ease;" onerror="console.error('Image failed to load:', this.src); this.style.display='none';">
+      </div><!-- Card 3 -->
+      <div class="landscape-card rounded-2xl overflow-hidden relative group cursor-pointer backdrop-blur-md transition-all duration-500" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); min-height: 280px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);"><img src="https://tx2.a.kwimgs.com/ufile/atlas/NTIzNDg3MTc3NDcwNTAzNDI2Nl8xNzM4MzMxODI1NjI3_6.jpg" alt="相册三" loading="lazy" class="w-full h-full object-cover absolute inset-0" style="transition: transform 0.5s ease;" onerror="console.error('Image failed to load:', this.src); this.style.display='none';">
+      </div><!-- Card 4 -->
+      <div class="landscape-card rounded-2xl overflow-hidden relative group cursor-pointer backdrop-blur-md transition-all duration-500" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); min-height: 280px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);"><img src="https://tx2.a.kwimgs.com/ufile/atlas/NTIzMzQ2NDQwNjQxMTA3MzY1Nl8xNzQ5ODczNjMwMDI2_21.jpg" alt="相册四" loading="lazy" class="w-full h-full object-cover absolute inset-0" style="transition: transform 0.5s ease;" onerror="console.error('Image failed to load:', this.src); this.style.display='none';">
+      </div><!-- Card 5 -->
+      <div class="landscape-card rounded-2xl overflow-hidden relative group cursor-pointer backdrop-blur-md transition-all duration-500" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); min-height: 280px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);"><img src="https://tx2.a.kwimgs.com/ufile/atlas/NTIzNDg3MTc3NDcwNTAzNDI2Nl8xNzM4MzMxODI1NjI3_9.jpg" alt="相册五" loading="lazy" class="w-full h-full object-cover absolute inset-0" style="transition: transform 0.5s ease;" onerror="console.error('Image failed to load:', this.src); this.style.display='none';">
+      </div><!-- Card 6 -->
+      <div class="landscape-card rounded-2xl overflow-hidden relative group cursor-pointer backdrop-blur-md transition-all duration-500" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); min-height: 280px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);"><img src="https://tx2.a.kwimgs.com/ufile/atlas/NTIzNDg3MTc3NDcwNTAzNDI2Nl8xNzM4MzMxODI1NjI3_7.jpg" alt="相册六" loading="lazy" class="w-full h-full object-cover absolute inset-0" style="transition: transform 0.5s ease;" onerror="console.error('Image failed to load:', this.src); this.style.display='none';">
+      </div>
+     </div>
+    </div>
+   </section><!-- Air@canva.xin -->
+   <footer class="w-full py-12 px-6" style="border-top: 1px solid rgba(255,255,255,0.1);">
+    <div class="max-w-6xl mx-auto">
+     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+       <img src="https://0000.uk/e7/_assets/images/b1239e96b76825c61262d856a42b2297.png" alt="Canva Logo" style="width: 22px; height: 22px; object-fit: contain;" loading="lazy" onerror="this.style.display='none';"><span style="font-family: 'Playfair Display', 'Noto Serif SC', serif; font-weight: 600; font-size: 0.95rem;">Canva</span>
+      </div>
+      <p id="footer-text" class="text-xs text-center" style="color: rgba(255,255,255,0.5);">© 2026 Canva.xin · 版权所有·无关Canva可画</p>
+      <div class="flex items-center gap-4"><button class="transition-colors duration-300" style="color: rgba(255,255,255,0.6);" onmouseenter="this.style.color='#ffffff'" onmouseleave="this.style.color='rgba(255,255,255,0.6)'" aria-label="Instagram"> <i data-lucide="instagram" style="width:18px;height:18px;"></i> </button> <button class="transition-colors duration-300" style="color: rgba(255,255,255,0.6);" onmouseenter="this.style.color='#ffffff'" onmouseleave="this.style.color='rgba(255,255,255,0.6)'" aria-label="Twitter"> <i data-lucide="twitter" style="width:18px;height:18px;"></i> </button> <button class="transition-colors duration-300" style="color: rgba(255,255,255,0.6);" onmouseenter="this.style.color='#ffffff'" onmouseleave="this.style.color='rgba(255,255,255,0.6)'" aria-label="Mail"> <i data-lucide="mail" style="width:18px;height:18px;"></i> </button>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+
+
+    //   Air@canva.xin 
+    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('anim-fade-up');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.landscape-card').forEach((card, i) => {
+      card.style.animationDelay = `${i * 0.1}s`;
+      observer.observe(card);
+    });
+
+    // Air@canva.xin SDK
+    const defaultConfig = {
+      hero_title: 'Air',
+      hero_subtitle: 'ChatAir',
+      explore_title: 'Q.Q',
+      footer_text: '© 2026 Canva.xin · 版权所有·无关Canva可画',
+      background_color: '#000000',
+      surface_color: '#1a1a1a',
+      text_color: '#ffffff',
+      primary_action_color: '#ffffff',
+      secondary_action_color: '#d0d0d0',
+      font_family: 'Playfair Display',
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      const c = { ...defaultConfig, ...config };
+
+      // Air@canva.xin 
+      const heroTitleEl = document.getElementById('hero-title');
+      if (heroTitleEl) {
+        const parts = c.hero_title.split('\n');
+        if (parts.length > 1) {
+          heroTitleEl.innerHTML = parts[0] + '<br><span class="shimmer-text" style="color:' + c.primary_action_color + ';">' + parts.slice(1).join(' ') + '</span>';
+        } else {
+          heroTitleEl.innerHTML = c.hero_title;
+        }
+      }
+
+      const heroSubEl = document.getElementById('hero-subtitle');
+      if (heroSubEl) heroSubEl.textContent = c.hero_subtitle;
+
+      const exploreTitleEl = document.getElementById('explore-title');
+      if (exploreTitleEl) exploreTitleEl.textContent = c.explore_title;
+
+      const footerEl = document.getElementById('footer-text');
+      if (footerEl) footerEl.textContent = c.footer_text;
+
+      // Air@canva.xin
+      const app = document.getElementById('app');
+      if (app) {
+        app.style.background = c.background_color;
+        app.style.color = c.text_color;
+      }
+
+      // Air@canva.xin
+      const fontFamily = c.font_family + ", 'Noto Serif SC', serif";
+      document.querySelectorAll('[style*="font-family"]').forEach(el => {
+        if (el.style.fontFamily.includes('Playfair') || el.style.fontFamily.includes('Noto Serif')) {
+          el.style.fontFamily = fontFamily;
+        }
+      });
+
+      // Air@canva.xin
+      const base = c.font_size;
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle) heroTitle.style.fontSize = `clamp(${base * 1.5}px, 6vw, ${base * 2.8}px)`;
+      const heroSub = document.getElementById('hero-subtitle');
+      if (heroSub) heroSub.style.fontSize = `${base * 1.05}px`;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => { applyConfig(config); },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+            { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+            { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+            { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+            { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['hero_title', config.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+          ['explore_title', config.explore_title || defaultConfig.explore_title],
+          ['footer_text', config.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
+
+    // Air@canva.xin
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dc607317559a102',t:'MTc3MzUyMDE0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
